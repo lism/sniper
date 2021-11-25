@@ -23,19 +23,28 @@ import (
 // Dark forester account is the account that owns the Trigger and SandwichRouter contracts and can configure it beforehand.
 // It is also the dest account for the sniped tokens.
 
-var accountAddress = "0x81F37cc0EcAE1dD1c89D79A98f857563873cFA76"
-var accountPk = "de8c0753508570d6bc3aea027a5896401c82fe997d3717d19c785Fbbee128695"
+var accountAddress = "0x75fB0779C2e991bC329B70154a268Fb5413357E8"
+var accountPk = "4b16bbfc72545eb15dfde45cc5698ebbbe17f678526c6befa3028fe4112352d6"
 var DARK_FORESTER_ACCOUNT Account
 
 ///////// CONST //////////////////
-var WBNB_ADDRESS = common.HexToAddress("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c")
-var BUSD_ADDRESS = common.HexToAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")
+//var WBNB_ADDRESS = common.HexToAddress("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c")
+//var BUSD_ADDRESS = common.HexToAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")
+//var CAKE_FACTORY_ADDRESS = common.HexToAddress("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73")
+//var CAKE_ROUTER_ADDRESS = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+
+//testnet
+var WBNB_ADDRESS = common.HexToAddress("0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd")
+var BUSD_ADDRESS = common.HexToAddress("0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7")
 var CAKE_FACTORY_ADDRESS = common.HexToAddress("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73")
-var CAKE_ROUTER_ADDRESS = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+var CAKE_ROUTER_ADDRESS = "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
+
 var WBNBERC20 *erc20.Erc20
 var BUSDERC20 *erc20.Erc20
 var FACTORY *uniswap.IPancakeFactory
-var CHAINID = big.NewInt(56)
+
+//var CHAINID = big.NewInt(56)
+var CHAINID = big.NewInt(97)
 var STANDARD_GAS_PRICE = big.NewInt(5000000000) // 5 GWEI
 var Nullhash = common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000")
 
@@ -54,21 +63,21 @@ var Sniping bool = true
 var PCS_ADDLIQ bool = Sniping
 
 // address of the Trigger smart contract
-var TRIGGER_ADDRESS = common.HexToAddress("0xaE23a2ADb82BcF36A14D9c158dDb1E0926263aFC")
+var TRIGGER_ADDRESS = common.HexToAddress("0xBeb10BC859628Da7Ff6fa8677D396c9a16f10419")
 
 // you can choose the base currency. 99% it's WBNB but sometimes it's BUSD
 var TOKENPAIRED = WBNB_ADDRESS
 var Snipe SnipeConfiguration
 
 // targeted token to buy (BEP20 address)
-var TTB = "0x9412F9AB702AfBd805DECe8e0627427461eF0602"
+var TTB = "0x0b24927d083216884ea4879f260610c991928fb8"
 
 // ML= minimum liquidity expected when dev add liquidity. We don't want to snipe if the team doesn't add the min amount of liq we expect. it's an important question to solve in the telegram of the project. You can also mmonitor bscscan and see the repartition of WBNB among the address that hold the targeted token and deduce the WBNB liq that wiill be added.
-var ML = 200
+var ML = 2
 
 ///////// SANDWICH CONFIG (Be careful: not profitable!) ////////////
 
-var Sandwicher bool = false
+var Sandwicher bool = true
 
 // allows spectator mode for tx that would have been profitable if sandwich realised successfully
 var MonitorModeOnly bool = false
@@ -118,7 +127,8 @@ var AMINMARGIN *big.Int
 var MAXGWEIFRONTRUN *big.Int
 
 ///////// BIG TRANSFERS CONFIG //////////
-var BNB = "50000000000000000000" // 50 BNB
+//var BNB = "50000000000000000000" // 50 BNB
+var BNB = "50000000000000000" //0.05BNB
 var BigTransfer big.Int
 var AddressesWatched = make(map[common.Address]AddressData)
 

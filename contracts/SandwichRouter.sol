@@ -213,7 +213,7 @@ contract SandwichRouter {
     using SafeMath for uint;
 
     address public immutable factory = 0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73;
-    address public immutable WETH = 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c;
+    address public immutable WETH = 0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd;
 
     modifier ensure(uint deadline) {
         require(deadline >= block.timestamp, 'PancakeRouter: EXPIRED');

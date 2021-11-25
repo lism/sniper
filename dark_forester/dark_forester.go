@@ -160,5 +160,4 @@ func main() {
 
 	// Launch txpool streamer
 	StreamNewTxs(client, rpcClient)
-
 }

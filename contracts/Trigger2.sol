@@ -66,16 +66,19 @@ interface IPancakeFactory {
 contract Trigger2 is Ownable {
 
     // bsc variables 
-    address constant wbnb= 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c;
+    // address constant wbnb= 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c;
+    // address constant cakeFactory = 0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73;
+    // bsc testnet
+    address constant wbnb = 0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd;
     address constant cakeFactory = 0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73;
-
+    
     // eth variables 
     // address constant wbnb= 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
     // address constant cakeRouter = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
     // address constant cakeFactory = 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f;
     
     address payable private administrator;
-    address private sandwichRouter = 0xE86d6A7549cFF2536918a206b6418DE0baE95e99;
+    address private sandwichRouter = 0x21D02237D97Eb6A8119b3C9D232C2A30cb1De6c5;
     uint private wbnbIn;
     uint private minTknOut;
     address private tokenToBuy;
