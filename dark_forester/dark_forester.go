@@ -10,7 +10,6 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -53,69 +52,10 @@ func StreamNewTxs(client *ethclient.Client, rpcClient *rpc.Client) {
 
 	if err != nil {
 		fmt.Println("error while subscribing: ", err)
+		return
 	}
 	fmt.Println("\nSubscribed to mempool txs!\n")
 
-	fmt.Println("\n////////////// BIG TRANSFERS //////////////////\n")
-	if global.BIG_BNB_TRANSFER == true {
-		fmt.Println("activated\nthreshold of interest : transfers >", global.BNB[:2], " BNB")
-	} else {
-		fmt.Println("not activated")
-	}
-
-	fmt.Println("\n////////////// ADDRESS MONITORING //////////////////\n")
-	if global.ADDRESS_MONITOR == true {
-		fmt.Println("activated\nthe following addresses are monitored : \n")
-		for addy, addressData := range global.AddressesWatched {
-			fmt.Println("address : ", addy, "name: ", addressData.Name)
-		}
-	} else {
-		fmt.Println("not activated")
-	}
-
-	fmt.Println("\n////////////// SANDWICHER //////////////////\n")
-	if global.Sandwicher == true {
-		fmt.Println("activated\n\nmax BNB amount authorised for one sandwich : ", global.Sandwicher_maxbound, "WBNB")
-		fmt.Println("minimum profit expected : ", global.Sandwicher_minprofit, "WBNB")
-		fmt.Println("current WBNB balance inside TRIGGER : ", formatEthWeiToEther(global.GetTriggerWBNBBalance()), "WBNB")
-		fmt.Println("TRIGGER balance at which we stop execution : ", formatEthWeiToEther(global.STOPLOSSBALANCE), "WBNB")
-		fmt.Println("WARNING: be sure TRIGGER WBNB balance is > SANDWICHER MAXBOUND !!")
-
-		activeMarkets := 0
-		for _, specs := range global.SANDWICH_BOOK {
-			if specs.Whitelisted == true && specs.ManuallyDisabled == false {
-				// fmt.Println(specs.Name, market, specs.Liquidity)
-				activeMarkets += 1
-			}
-		}
-		fmt.Println("\nNumber of active Markets: ", activeMarkets, "\n")
-
-		fmt.Println("\nManually disabled Markets: \n")
-		for market, specs := range global.SANDWICH_BOOK {
-			if specs.ManuallyDisabled == true {
-				fmt.Println(specs.Name, market, specs.Liquidity)
-			}
-		}
-		fmt.Println("\nEnnemies: \n")
-		for ennemy, _ := range global.ENNEMIES {
-			fmt.Println(ennemy)
-		}
-
-	} else {
-		fmt.Println("not activated")
-	}
-
-	fmt.Println("\n////////////// LIQUIDITY SNIPING //////////////////\n")
-	if global.Sniping == true {
-		fmt.Println("activated")
-		name, _ := global.Snipe.Tkn.Name(&bind.CallOpts{})
-		fmt.Println("token targetted: ", global.Snipe.TokenAddress, "(", name, ")")
-		fmt.Println("minimum liquidity expected : ", formatEthWeiToEther(global.Snipe.MinLiq), getTokenSymbol(global.Snipe.TokenPaired, client))
-		fmt.Println("current WBNB balance inside TRIGGER : ", formatEthWeiToEther(global.GetTriggerWBNBBalance()), "WBNB")
-
-	} else {
-		fmt.Println("not activated")
-	}
 	chainID, _ := client.NetworkID(context.Background())
 	signer := types.NewEIP155Signer(chainID)
 
@@ -125,6 +65,7 @@ func StreamNewTxs(client *ethclient.Client, rpcClient *rpc.Client) {
 		case transactionHash := <-newTxsChannel:
 			// Get transaction object from hash by querying the client
 			tx, is_pending, _ := client.TransactionByHash(context.Background(), transactionHash)
+			fmt.Println(tx)
 			// If tx is valid and still unconfirmed
 			if is_pending {
 				_, _ = signer.Sender(tx)

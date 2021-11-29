@@ -23,21 +23,21 @@ import (
 // Dark forester account is the account that owns the Trigger and SandwichRouter contracts and can configure it beforehand.
 // It is also the dest account for the sniped tokens.
 
-var accountAddress = "0x75fB0779C2e991bC329B70154a268Fb5413357E8"
-var accountPk = "4b16bbfc72545eb15dfde45cc5698ebbbe17f678526c6befa3028fe4112352d6"
+var accountAddress = "0x1234567890abcdef"
+var accountPk = "abcdef"
 var DARK_FORESTER_ACCOUNT Account
 
 ///////// CONST //////////////////
-//var WBNB_ADDRESS = common.HexToAddress("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c")
-//var BUSD_ADDRESS = common.HexToAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")
-//var CAKE_FACTORY_ADDRESS = common.HexToAddress("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73")
-//var CAKE_ROUTER_ADDRESS = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+var WBNB_ADDRESS = common.HexToAddress("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c")
+var BUSD_ADDRESS = common.HexToAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")
+var CAKE_FACTORY_ADDRESS = common.HexToAddress("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73")
+var CAKE_ROUTER_ADDRESS = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
 
 //testnet
-var WBNB_ADDRESS = common.HexToAddress("0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd")
-var BUSD_ADDRESS = common.HexToAddress("0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7")
-var CAKE_FACTORY_ADDRESS = common.HexToAddress("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73")
-var CAKE_ROUTER_ADDRESS = "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
+//var WBNB_ADDRESS = common.HexToAddress("0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd")
+//var BUSD_ADDRESS = common.HexToAddress("0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7")
+//var CAKE_FACTORY_ADDRESS = common.HexToAddress("0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73")
+//var CAKE_ROUTER_ADDRESS = "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
 
 var WBNBERC20 *erc20.Erc20
 var BUSDERC20 *erc20.Erc20
